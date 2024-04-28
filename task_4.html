@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Задача №4</title>
+    <style>
+      .container-for-table {
+        display: flex;
+        gap: 50px;
+      }
+      td {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Задача 4. Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо
+        відбувається клік на якійсь із клітинок, то до відповідної таблиці
+        додається червона рамка (спробуйте додати можливість відображення
+        кількості кліків біля назви таблиці з використанням відповідно доданого
+        для цього атрибута).
+      </h1>
+    </header>
+    <main>
+      <div>
+        <h2>Count click : <span></span></h2>
+      </div>
+      <div class="container-for-table"></div>
+    </main>
+    <script>
+      function creatBorder(event) {
+        let thisClick = event.target;
+        if (thisClick.tagName === "TD") {
+          thisClick.closest(".tabelEl").style.border = "3px solid red";
+        }
+      }
+
+      function creatTable(
+        countTable = 3,
+        row = 3,
+        col = 3,
+        minNum = 1,
+        maxNum = 100
+      ) {
+        for (let table = 0; table < countTable; table++) {
+          let tableEl = document.createElement("table");
+          tableEl.className = "tabelEl";
+          for (let r = 0; r < row; r++) {
+            let trEl = document.createElement("tr");
+            for (let c = 0; c < col; c++) {
+              let tdEl = document.createElement("td");
+              tdEl.innerText =
+                minNum + Math.floor(Math.random() * (maxNum - minNum + 1));
+              trEl.append(tdEl);
+            }
+            tableEl.append(trEl);
+          }
+          tableEl.onclick = creatBorder;
+          document.querySelector(".container-for-table").append(tableEl);
+        }
+      }
+      creatTable();
+
+      let count = 0;
+      window.onclick = function () {
+        count++;
+        document.querySelector("span").innerText = count;
+      };
+    </script>
+  </body>
+</html>

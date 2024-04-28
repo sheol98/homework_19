@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      main {
+        display: flex;
+        gap: 50px;
+      }
+      .general-list {
+        border: 3px solid black;
+        width: 270px;
+        padding: 5px;
+      }
+      .general-list div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* max-width: 250px; */
+        border: 3px solid black;
+        margin-bottom: 10px;
+        padding: 2px;
+      }
+      .span-go {
+        font-size: 24px;
+        color: green;
+      }
+
+      .for-competition {
+        border: 3px solid black;
+        width: 270px;
+        padding: 5px;
+      }
+      .for-competition div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* max-width: 250px; */
+        border: 3px solid black;
+        margin-bottom: 10px;
+        padding: 2px;
+      }
+      .span-red {
+        color: red;
+      }
+    </style>
+    <title>Задача №6</title>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Дано список спортсменів. Потрібно сформувати список тих, які будуть
+        брати участь у змаганні. При цьому є два стовпці. В одному відображені
+        всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні
+        на зелену стрілку спортсмен переміщається у список для змагань. При
+        натисканні на червону стрілку спортсмен переміщається у загальний
+        список.
+      </h1>
+    </header>
+    <main>
+      <div class="container-general-list">
+        <h2>Загальний список</h2>
+        <div class="general-list">
+          <div>
+            <h3>Андрій Лунін</h3>
+            <span class="span-go">=></span>
+          </div>
+          <div>
+            <h3>Богдан Михайліченко</h3>
+            <span class="span-go">=></span>
+          </div>
+          <div>
+            <h3>Ілля Забарний</h3>
+            <span class="span-go">=></span>
+          </div>
+          <div>
+            <h3>Віталій Миколенко</h3>
+            <span class="span-go">=></span>
+          </div>
+          <div>
+            <h3>Олександр Зінченко</h3>
+            <span class="span-go">=></span>
+          </div>
+          <div>
+            <h3>Олександр Караваєв</h3>
+            <span class="span-go">=></span>
+          </div>
+          <div>
+            <h3>Сергій Сидорчук</h3>
+            <span class="span-go">=></span>
+          </div>
+        </div>
+      </div>
+      <div class="container-for-competition">
+        <h2>Обрані для змагання</h2>
+        <div class="for-competition"></div>
+      </div>
+    </main>
+    <script>
+      function goToCompetition(event) {
+        let thisClick = event.target;
+        console.log(thisClick);
+        if (thisClick.tagName === "SPAN") {
+          thisClick.innerText = "<=";
+          thisClick.classList.toggle("span-red");
+          document
+            .querySelector(".for-competition")
+            .append(thisClick.parentElement);
+        }
+      }
+
+      function goBack(event) {
+        let thisClick = event.target;
+        if (thisClick.tagName === "SPAN") {
+          thisClick.innerText = "=>";
+          thisClick.classList.toggle("span-red");
+          document
+            .querySelector(".general-list")
+            .append(thisClick.parentElement);
+        }
+      }
+      document.querySelector(".general-list").onclick = goToCompetition;
+      document.querySelector(".for-competition").onclick = goBack;
+    </script>
+  </body>
+</html>

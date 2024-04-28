@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Задача №1</title>
+    <style>
+      div {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Дано 10 рядків тексту «Hello!» у окремих div. При кліку на якийсь із них
+        усі наступні повинні бути зафарбовані у червоний колір.
+      </h1>
+    </header>
+    <main></main>
+    <script>
+      function creatDiv(quantityDiv = 10) {
+        for (let i = 0; i < quantityDiv; i++) {
+          let divEl = document.createElement("div");
+          divEl.innerText = "Hello!";
+          document.querySelector("main").append(divEl);
+        }
+      }
+      creatDiv();
+      function fillNextDiv(event) {
+        let thisDiv = event.target;
+        while (thisDiv.nextElementSibling !== null) {
+          thisDiv = thisDiv.nextElementSibling;
+          thisDiv.style.backgroundColor = "red";
+        }
+      }
+
+      document.querySelector("main").onclick = fillNextDiv;
+    </script>
+  </body>
+</html>

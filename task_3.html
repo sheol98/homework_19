@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Задача №3</title>
+    <style>
+      .container-for-list {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Дано 5 випадковим чином згенерованих нумерованих списків з рандомними
+        числами (кількість елементів у списку випадкова від 1 до 10, елементи
+        випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з
+        парною кількістю елементів зафарбувати у зелений колір, інші у червоний.
+      </h1>
+    </header>
+    <main>
+      <div class="container-for-list"></div>
+    </main>
+    <script>
+      function getRandomQuantityLi(rangeStart = 1, rangeEnd = 10) {
+        return (
+          rangeStart + Math.floor(Math.random() * (rangeEnd - rangeStart + 1))
+        );
+      }
+      function creatList(minNum = 1, maxNum = 100) {
+        for (let ol = 0; ol < 5; ol++) {
+          let olEl = document.createElement("ol");
+          for (let li = 0; li < getRandomQuantityLi(); li++) {
+            let liEl = document.createElement("li");
+            liEl.innerText =
+              minNum + Math.floor(Math.random() * (maxNum - minNum + 1));
+            olEl.append(liEl);
+          }
+          document.querySelector(".container-for-list").append(olEl);
+        }
+      }
+      function changeBGC() {
+        let olElements = document.getElementsByTagName("ol");
+        for (const ol of olElements) {
+          if (ol.children.length % 2 === 0) ol.style.backgroundColor = "green";
+          else ol.style.backgroundColor = "red";
+        }
+      }
+      function creatBtn() {
+        let btnEl = document.createElement("button");
+        btnEl.innerText = "check";
+        btnEl.onclick = changeBGC;
+        document.querySelector(".container-for-list").after(btnEl);
+      }
+      creatList();
+      creatBtn();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Задача №2</title>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Дано 5 елементів input. При введенні значення у якийсь із них необхідно
+        автоматично заповнювати інші (усі попередні у спадному порядку(кожен
+        попередній має значення на 1 менше за наступний), усі наступні на 1
+        більше (кожен наступне на 1 більше за попереднього)
+      </h1>
+    </header>
+    <main>
+      <div class="inp__container">
+        <label>
+          value 1
+          <input type="number" />
+        </label>
+        <br />
+        <label>
+          value 2
+          <input type="number" />
+        </label>
+        <br />
+        <label>
+          value 3
+          <input type="number" />
+        </label>
+        <br />
+        <label>
+          value 4
+          <input type="number" />
+        </label>
+        <br />
+        <label>
+          value 5
+          <input type="number" />
+        </label>
+      </div>
+    </main>
+    <script>
+      function changeValue(event) {
+        let thisInp = event.target;
+        if (thisInp.tagName === "INPUT") {
+          let val = parseInt(thisInp.value);
+          let inp = thisInp.parentElement;
+
+          while (inp.nextElementSibling !== null) {
+            inp = inp.nextElementSibling;
+            inp = inp.nextElementSibling;
+            inp.firstElementChild.value = ++val;
+          }
+          val = parseInt(thisInp.value);
+          inp = thisInp.parentElement;
+          while (inp.previousElementSibling !== null) {
+            inp = inp.previousElementSibling;
+            inp = inp.previousElementSibling;
+            inp.firstElementChild.value = --val;
+          }
+        }
+      }
+      document.querySelector("div").onchange = changeValue;
+    </script>
+  </body>
+</html>

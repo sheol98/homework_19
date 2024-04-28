@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .container-for-products {
+        display: flex;
+        gap: 30px;
+      }
+      .cntProd {
+        padding: 10px;
+        max-width: 200px;
+				
+      }
+      .containerImg {
+        width: 100px;
+      }
+      .containerImg img {
+        max-width: 100%;
+      }
+      .border-green {
+        border: 3px solid green;
+        padding: 7px;
+      }
+    </style>
+    <title>Задача №5</title>
+  </head>
+  <body>
+    <header>
+      <h1>
+        Відображаємо картки товарів, які користувач може вибирати. Вибраний
+        товар має зелену рамку (при кліку робити toogle з класом вибраного
+        елемента)
+      </h1>
+    </header>
+    <main>
+      <div class="container-for-products"></div>
+    </main>
+    <script>
+      class Product {
+        constructor(initDate) {
+          this.initDate = initDate;
+          this.render();
+        }
+        creatHeader() {
+          const headerEl = document.createElement("div");
+          headerEl.innerText = this.initDate.headerText;
+          headerEl.className = "headerEl";
+
+          return headerEl;
+        }
+        creatImg() {
+          const containerImg = document.createElement("div");
+          containerImg.className = "containerImg";
+
+          const imgEl = document.createElement("img");
+          imgEl.setAttribute("src", this.initDate.imgProd);
+          containerImg.append(imgEl);
+
+          return containerImg;
+        }
+
+        creatAbout() {
+          const aboutProdEl = document.createElement("div");
+          aboutProdEl.className = "aboutProd";
+          aboutProdEl.innerText = this.initDate.aboutProd;
+
+          return aboutProdEl;
+        }
+
+        creatPrice() {
+          const priceEl = document.createElement("div");
+          priceEl.innerText = this.initDate.price;
+
+          return priceEl;
+        }
+        changeBorder(event) {
+          let thisClick = event.target;
+          thisClick.closest(".cntProd").classList.toggle("border-green");
+        }
+        render() {
+          const containerProduct = document.createElement("div");
+          containerProduct.className = "cntProd";
+          containerProduct.append(this.creatHeader());
+          containerProduct.append(this.creatImg());
+          containerProduct.append(this.creatAbout());
+          containerProduct.append(this.creatPrice());
+
+          containerProduct.onclick = this.changeBorder;
+          document
+            .querySelector(".container-for-products")
+            .append(containerProduct);
+        }
+      }
+
+      let productsList = [
+        {
+          headerText: "Топ ПРОДАЖ",
+          imgProd:
+            "https://content1.rozetka.com.ua/goods/images/big/362592316.jpg",
+          aboutProd: "Ноутбук Acer Aspire 7 A715-76G-56U7",
+          price: "29 999₴",
+        },
+        {
+          headerText: "Топ ПРОДАЖ",
+          imgProd:
+            "https://content1.rozetka.com.ua/goods/images/big/369688518.jpg",
+          aboutProd: "Ноутбук Acer Aspire 7 A715-76G-51C4",
+          price: "27 777₴",
+        },
+        {
+          headerText: "АКЦІЯ",
+          imgProd:
+            "https://content2.rozetka.com.ua/goods/images/big/370191080.jpg",
+          aboutProd: "Ноутбук Acer Aspire 5 A515-57-59VX (NX.KN4EU.00C)",
+          price: "23 999₴",
+        },
+        {
+          headerText: "Топ ПРОДАЖ",
+          imgProd:
+            "https://content1.rozetka.com.ua/goods/images/big/395969845.jpg",
+          aboutProd: "Ноутбук Acer Aspire 5 A515-57G-56SZ (NX.KMHEU.005)",
+          price: "29 777₴",
+        },
+      ];
+
+      for (const prod of productsList) {
+        new Product(prod);
+      }
+    </script>
+  </body>
+</html>
